@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Quỹ lừa đảo{% endblock %}
+
+{% block content %}
+    <h1>Thông tin tài khoản</h1>
+    {% if data.error %}
+        <p class="error">{{ data.error }}</p>
+    {% else %}
+        <p><strong>Tiền mặt hiện có đã trừ đi các khoản nợ + phí:</strong> {{ data.availableCash }} VND</p>
+        <p><strong>Tài sản ròng:</strong> {{ data.netAssetValue }} VND</p>
+        <p><strong>Giá trị chứng khoán tính theo giá đầu ngày:</strong> {{ data.stockValue }} VND</p>
+    {% endif %}
+{% endblock %}
