@@ -12,8 +12,8 @@ app.config['CACHE_TYPE'] = 'SimpleCache'
 app.config['CACHE_DEFAULT_TIMEOUT'] = 3600  # Cache timeout in seconds
 cache = Cache(app)
 
-USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PASSWORD")
+USERNAME = os.getenv("DNSE_USERNAME")
+PASSWORD = os.getenv("DNSE_PASSWORD")
 
 @app.route("/")
 def home():
