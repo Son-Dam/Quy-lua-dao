@@ -4,11 +4,11 @@
 
 {% block content %}
     <h1>Thông tin tài khoản</h1>
-    {% if data.error %}
-        <p class="error">{{ data.error }}</p>
+    {% if account_data.error %}
+        <p class="error">{{ account_data.error }}</p>
     {% else %}
-        <p><strong>Tiền mặt hiện có đã trừ đi các khoản nợ + phí:</strong> {{ data.availableCash }} VND</p>
-        <p><strong>Tài sản ròng:</strong> {{ data.netAssetValue }} VND</p>
-        <p><strong>Giá trị chứng khoán tính theo giá đầu ngày:</strong> {{ data.stockValue }} VND</p>
+        <p><strong>Tiền mặt hiện có đã trừ đi các khoản nợ + phí:</strong> {{ account_data.availableCash }} VND</p>
+        <p><strong>Tài sản ròng:</strong> {{ account_data.netAssetValue }} VND</p>
+        <p><strong>Giá trị chứng khoán tính theo giá đầu ngày:</strong> {{ account_data.stockValue }} VND</p>
     {% endif %}
 {% endblock %}
