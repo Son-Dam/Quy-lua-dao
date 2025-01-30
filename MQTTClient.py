@@ -17,7 +17,9 @@ class Config:
     """
     BROKER = 'datafeed-lts.dnse.com.vn'
     PORT = 443
-    TOPICS = ("plaintext/quotes/derivative/OHLC/1/VN30F1M", "plaintext/quotes/stock/tick/+")
+    TOPICS = ("plaintext/quotes/derivative/OHLC/1/VN30F1M", #Thông tin nến của VN30
+              "plaintext/quotes/stock/tick/+" #Thông tin 
+              )
     CLIENT_ID = f'python-json-mqtt-ws-sub-{random.randint(0, 1000)}'
     FIRST_RECONNECT_DELAY = 1
     RECONNECT_RATE = 2
@@ -84,8 +86,8 @@ class MQTTClient:
         logging.debug(f'symbol: {payload["symbol"]}')
         socketio.emit("mqtt_message", payload)
 
-def start_mqtt(socketio_instance):
+def start_mqtt(username, password, socketio_instance):
     logging.basicConfig(level=logging.INFO)
-    mqtt_client = MQTTClient(socketio_instance)
+    mqtt_client = MQTTClient(username, password,socketio_instance)
     client = mqtt_client.connect_mqtt()
     client.loop_start()

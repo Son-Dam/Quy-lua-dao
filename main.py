@@ -13,7 +13,7 @@ load_dotenv()
 app = Flask(__name__)
 app.config['CACHE_TYPE'] = 'SimpleCache'
 app.config['CACHE_DEFAULT_TIMEOUT'] = 3600  # Cache timeout in seconds
-
+g.stocks = {}
 cache = Cache(app)
 
 
@@ -89,8 +89,18 @@ def get_info():
 
     return render_template("account.html", account_data = CurrentAccountInfoDTO.from_api(account_data).to_dict())
 
-
-
+def get_deals():
+    token = get_token()
+    id = get_current_account_id()
+    response = requests.get(f"https://services.entrade.com.vn/dnse-deal-service/deals?accountNo={id}",
+                            headers= {"Authorization":f"Bearer {token}"},timeout=300)
+    deals = None
+    if(response.status_code == 200):
+        deals = response.json()
+    else:
+        app.logger.error(f"Failed to get account's deals with error {response.status_code}")
+        deals["error"] = "failed to get data"
+    return deals
 
 
 
