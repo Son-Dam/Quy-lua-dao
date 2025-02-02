@@ -199,9 +199,9 @@ def get_deals():
         deals = response.json()["deals"]
         Config.TOPICS = ()
         for deal in deals:
-            Config.TOPICS += (f"plaintext/quotes/stock/OHLC/1D/{deal["symbol"]}", # Data nến in 1 day
-                         f"plaintext/quotes/stock/tick/{deal["symbol"]}", # Data thông tin khớp lệnh của mã
-                         f"plaintext/quotes/stock/SI/{deal["symbol"]}", # Data stock info
+            Config.TOPICS += (f'plaintext/quotes/stock/OHLC/1D/{deal["symbol"]}', # Data nến in 1 day
+                         f'plaintext/quotes/stock/tick/{deal["symbol"]}', # Data thông tin khớp lệnh của mã
+                         f'plaintext/quotes/stock/SI/{deal["symbol"]}', # Data stock info
                          )
     else:
         app.logger.error("Failed to get account's deals with error %s", response.status_code)
