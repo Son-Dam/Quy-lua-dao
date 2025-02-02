@@ -1,4 +1,10 @@
-class Current_Account_Info_DTO:
+from dataclasses import dataclass
+
+@dataclass
+class CurrentAccountInfoDTO:
+    """
+        Thông tin tiền trong tài khoản
+    """
     totalCash: float
     """
         total number of cash
@@ -36,16 +42,6 @@ class Current_Account_Info_DTO:
         Tiền cổ tức chờ về
     """
 
-    def __init__(self, totalCash, availableCash, totalDebt, stockValue, netAssetValue, receivingAmount, withdrawableCash, cashDividendReceiving):
-        self.totalCash = totalCash
-        self.availableCash = availableCash
-        self.totalDebt = totalDebt
-        self.stockValue = stockValue
-        self.netAssetValue = netAssetValue
-        self.receivingAmount = receivingAmount
-        self.withdrawableCash = withdrawableCash
-        self.cashDividendReceiving = cashDividendReceiving
-
     @classmethod
     def from_api(cls, api_data):
         """
@@ -58,6 +54,7 @@ class Current_Account_Info_DTO:
             stockValue = api_data["stockValue"],
             netAssetValue = api_data["netAssetValue"],
             receivingAmount = api_data["receivingAmount"],
+            secureAmount = api_data["secureAmount"],
             withdrawableCash = api_data["withdrawableCash"],
             cashDividendReceiving = api_data["cashDividendReceiving"]
         )
