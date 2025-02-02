@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Quỹ lừa đảo{% endblock %}
+{% block title %}Thông tin tài khoản{% endblock %}
 
 {% block content %}
     <h1>Thông tin tài khoản</h1>
@@ -11,4 +11,33 @@
         <p><strong>Tài sản ròng:</strong> {{ account_data.netAssetValue }} VND</p>
         <p><strong>Giá trị chứng khoán tính theo giá đầu ngày:</strong> {{ account_data.stockValue }} VND</p>
     {% endif %}
+
+    <h1>Thông tin deals đang nắm giữ</h1>
+    {% if deals|length == 0 %}
+        <p class="error">{{ deals.error }}</p>
+    {% else %}
+        {% for deal in deals %}
+            <p><strong>Mã: </strong> {{ deal.symbol }} </p>
+            <p><strong>Giá vốn hiện tại của deal:</strong> {{ deal.cost_price }} VND</p>
+            <p><strong>Giá thị trường:</strong> {{ deal.market_price }} VND</p>
+        {% endfor %}
+    {% endif %}
+
+    <h1>Data các mã đang nắm giữ</h1>
+
+    <div id="data-container">
+        <p>Click refresh to load latest data.</p>
+    </div>
+    
+    <button id="refresh-btn">Refresh Data</button>
+    
+        <script>
+            $(document).ready(function() {
+                $("#refresh-btn").click(function() {
+                    $.get("/get-market-data", function(data) {
+                        $("#data-container").html("<pre>" + JSON.stringify(data, null, 2) + "</pre>");
+                    });
+                });
+            });
+        </script>
 {% endblock %}

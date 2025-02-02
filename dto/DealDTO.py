@@ -84,24 +84,24 @@ class DealDTO:
         Factory method to create a mapper from API response data.
         """
         return cls(
-            symbol = api_data.symbol,
-            orders = api_data.order,
-            status = api_data.status,
-            side = api_data.side,
-            secure = api_data.secure,
-            accumulate_quantity = api_data.accumulateQuantity,
-            closed_quantity = api_data.closedQuantity,
-            cost_price = api_data.costPrice,
-            average_cost_price = api_data.averageCostPrice,
-            market_price = api_data.marketPrice,
-            realized_profit = api_data.realizedProfit,
-            collected_buying_fee = api_data.collectedBuyingFee,
-            collected_buying_tax = api_data.collectedBuyingTax,
-            collected_selling_fee = api_data.collectedSellingFee,
-            collected_selling_tax = api_data.collectedSellingTax,
-            break_even_price = api_data.breakEvenPrice,
-            created_date = api_data.createdDate,
-            modified_date = api_data.modifiedDate
+            symbol = api_data["symbol"],
+            orders = getattr( api_data,"order",[]),
+            status = api_data["status"],
+            side = api_data["side"],
+            secure = api_data["secure"],
+            accumulate_quantity = api_data["accumulateQuantity"],
+            closed_quantity = api_data["closedQuantity"],
+            cost_price = api_data["costPrice"],
+            average_cost_price = api_data["averageCostPrice"],
+            market_price = api_data["marketPrice"],
+            realized_profit = api_data["realizedProfit"],
+            collected_buying_fee = api_data["collectedBuyingFee"],
+            collected_buying_tax = api_data["collectedBuyingTax"],
+            collected_selling_fee = api_data["collectedSellingFee"],
+            collected_selling_tax = api_data["collectedSellingTax"],
+            break_even_price = api_data["breakEvenPrice"],
+            created_date = api_data["createdDate"],
+            modified_date = api_data["modifiedDate"]
         )
 
     def to_dict(self):
